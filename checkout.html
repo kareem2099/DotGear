@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DotGear - إتمام الدفع</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="checkout-container">
+
+        <div class="checkout-section">
+            <div class="checkout-header">
+                <i class="fas fa-shipping-fast" style="color:#ff4500"></i>
+                <h3>بيانات الشحن والدفع</h3>
+            </div>
+
+            <form id="checkoutForm">
+                <h4 style="color:#ccc; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px">عنوان التوصيل</h4>
+
+                <div class="input-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="fullName" placeholder="مثال: أحمد محمد" required>
+                </div>
+
+                <div class="input-group">
+                    <label>العنوان بالتفصيل</label>
+                    <input type="text" id="address" placeholder="المدينة، الحي، اسم الشارع" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" placeholder="05xxxxxxxx" required>
+                    </div>
+                    <div class="input-group">
+                        <label>الرمز البريدي</label>
+                        <input type="text" placeholder="اختياري">
+                    </div>
+                </div>
+
+                <h4 style="color:#ccc; margin:25px 0 15px; border-bottom:1px solid #333; padding-bottom:5px">وسيلة الدفع</h4>
+
+                <div class="payment-methods">
+                    <div class="payment-option active" onclick="selectPayment('card')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>بطاقة ائتمان</span>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('cod')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>دفع عند الاستلام</span>
+                    </div>
+                </div>
+
+                <div id="card-details">
+                    <div class="input-group">
+                        <label>رقم البطاقة</label>
+                        <input type="text" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                        <div style="margin-top:5px; font-size:1.2rem;">
+                            <i class="fab fa-cc-visa" style="color:white"></i>
+                            <i class="fab fa-cc-mastercard" style="color:white"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>تاريخ الانتهاء</label>
+                            <input type="text" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="input-group">
+                            <label>CVV</label>
+                            <input type="password" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="pay-btn" style="margin-top:20px">
+                    تأكيد الطلب ودفع <span id="btnTotal"></span>
+                </button>
+
+                <div class="secure-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>بياناتك محمية بتشفير SSL 256-bit</span>
+                </div>
+            </form>
+        </div>
+
+        <div class="checkout-section" style="height: fit-content;">
+            <div class="checkout-header">
+                <i class="fas fa-shopping-cart" style="color:#ffd700"></i>
+                <h3>ملخص الطلب</h3>
+            </div>
+
+            <div id="order-summary-items">
+                <p style="color:#888; text-align:center">جاري تحميل السلة...</p>
+            </div>
+
+            <div class="total-row">
+                <span>الإجمالي الكلي:</span>
+                <span id="finalTotal" style="color:#ff4500">$0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

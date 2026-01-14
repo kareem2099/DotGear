@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DotGear - المفضلة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DotGear</div>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="products.html">المنتجات</a></li>
+                <li><a href="cart.html">السلة</a></li>
+                <li><a href="wishlist.html" class="active">المفضلة</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container">
+        <h2>منتجاتي المفضلة</h2>
+        <div id="wishlist-container" class="products-grid">
+            <!-- Wishlist items will be loaded here by JS -->
+        </div>
+
+        <div id="empty-wishlist" style="display: none; text-align: center; padding: 80px 20px;">
+            <i class="fas fa-heart-broken" style="font-size: 4rem; color: #666; margin-bottom: 20px;"></i>
+            <h3 style="color: #ccc; margin-bottom: 15px;">المفضلة فارغة</h3>
+            <p style="color: #888; margin-bottom: 30px;">لم تقم بإضافة أي منتجات إلى المفضلة بعد</p>
+            <a href="products.html" class="btn">تصفح المنتجات</a>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Wishlist page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            renderWishlist();
+        });
+
+        function renderWishlist() {
+            const container = document.getElementById('wishlist-container');
+            const emptyState = document.getElementById('empty-wishlist');
+
+            const wishlistItems = getWishlistItems();
+
+            if (wishlistItems.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+            container.innerHTML = '';
+
+            wishlistItems.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="wishlist-heart active" data-product-id="${product.id}" onclick="toggleWishlist(${product.id}); renderWishlist();">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p class="price">$${product.price}</p>
+                    <a href="details.html?id=${product.id}" class="btn">عرض التفاصيل</a>
+                    <button onclick="addToCart(${product.id})" class="btn">أضف إلى السلة</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
